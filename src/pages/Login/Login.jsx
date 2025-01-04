@@ -2,6 +2,8 @@ import React, { useContext, useRef } from 'react';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { useNavigate,Link } from 'react-router-dom';
 import swal from 'sweetalert2';
+import animationData from '../../assets/Animation - 1735972339956.json'
+import Lottie from 'lottie-react';
 
 const Login = () => {
 
@@ -55,9 +57,12 @@ const handleLogin = (e) => {
     return (
         <div className="hero bg-base-200 min-h-screen rounded-xl">
       <div className="hero-content flex-col ">
-        <div className="text-center lg:text-left">
-          <h1 className="text-2xl font-bold">Login now!</h1>
-        </div>
+        <div className="hero-content flex-col lg:flex-row-reverse gap-10">
+          {/* <h1 className="text-2xl font-bold">Login now!</h1> */}
+          <div className="text-center lg:text-left max-w-xl">
+          <Lottie animationData = {animationData}></Lottie>
+          </div>
+        
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <form onSubmit={handleLogin} className="card-body">
             <p>
@@ -111,6 +116,7 @@ const handleLogin = (e) => {
               Register.
             </Link>
           </p>
+        </div>
         </div>
       </div>
     </div>

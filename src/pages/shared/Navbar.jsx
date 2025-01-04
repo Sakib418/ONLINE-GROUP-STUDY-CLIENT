@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
-
+import logo from '../../assets/images/logo.png'
+import { Tooltip } from "react-tooltip";
 const Navbar = () => {
      
      const {user,signOutUser} = useContext(AuthContext);
@@ -59,17 +60,17 @@ const Navbar = () => {
     </div>
     <div className="avatar hidden lg:block">
   <div className="w-16 rounded-full">
-  {/* <a className="my-anchor-element" place="top"> 
+  <a className="my-anchor-element" place="top"> 
   <img src={(user) ? user.photoURL : logo} />
-  </a> */}
+  </a>
     
 
-  {/* <Tooltip anchorSelect=".my-anchor-element" place="top">
+  <Tooltip anchorSelect=".my-anchor-element" place="top">
     
     {user && user.displayName
     }
     
-  </Tooltip> */}
+  </Tooltip>
     
   </div>
 </div>
