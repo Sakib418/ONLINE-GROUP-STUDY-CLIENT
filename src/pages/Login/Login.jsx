@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { useNavigate,Link } from 'react-router-dom';
+import swal from 'sweetalert2';
 
 const Login = () => {
 
@@ -20,7 +21,7 @@ const handleLogin = (e) => {
       .then((res) => {
         console.log(res.user);
         e.target.reset();
-        Swal.fire({
+        swal.fire({
           title: "Success!",
           text: "Login Successfully",
           icon: "success",

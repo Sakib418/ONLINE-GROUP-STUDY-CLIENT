@@ -7,6 +7,7 @@ import Lottie from 'lottie-react';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { updateProfile } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import auth from '../../firebase/firebase.init';
 
 
 
