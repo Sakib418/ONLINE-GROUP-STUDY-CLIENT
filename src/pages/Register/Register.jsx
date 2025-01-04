@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEyeSlash } from 'react-icons/fa';
 import { FaEye } from "react-icons/fa";
 import registerLottieData from '../../assets/Animation - 1735884761600.json'
 import Lottie from 'lottie-react';
+import AuthContext from '../../context/AuthContext/AuthContext';
+import { updateProfile } from 'firebase/auth';
+import { toast } from 'react-toastify';
+
+
+
 const Register = () => {
 
-    //const {createUser,handlewithGithub} = useContext(AuthContext);
+    const {createUser,handlewithGithub} = useContext(AuthContext);
     const navigate = useNavigate();
     const [showPassword,setShowpassword] = useState(false);
 
@@ -51,7 +57,7 @@ const Register = () => {
         });
        }
        const handleLoginWithGithub = (e) =>{
-      
+        e.preventDefault();
         handlewithGithub()
         .then(res => {
             console.log(res.user);
@@ -69,7 +75,7 @@ const Register = () => {
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <form onSubmit={handleRegister} className=" card-body relative">
-            <p>Login with <Link onClick={handleLoginWithGithub} className='text-blue-700'>Github</Link></p>
+            <p>Register with <Link onClick={handleLoginWithGithub} className='text-blue-700'>Github</Link></p>
             <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
