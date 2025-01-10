@@ -6,6 +6,9 @@ import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
+import CreateAssignment from "../pages/CreateAssignment/CreateAssignment";
+import Assignments from "../pages/AssignmentsPage/Assignments";
+import UpdateAssignment from "../pages/UpdateAssignment/UpdateAssignment";
 
   const router = createBrowserRouter([
     {
@@ -24,7 +27,22 @@ import Login from "../pages/Login/Login";
         {
             path: '/login',
             element: <Login></Login>
+        },
+        {
+          path: '/createAssignment',
+          element: <CreateAssignment></CreateAssignment>
+        },
+        {
+          path: '/assignments',
+          element: <Assignments></Assignments>,
+          loader: () => fetch('http://localhost:3000/AllAssignments')
+        },
+        {
+          path: '/updateAssignment/:id',
+          element: <UpdateAssignment></UpdateAssignment>,
+          loader: ({params}) => fetch(`http://localhost:3000/GetAssignment/${params.id}`)
         }
+
       ]
     },
   ]);

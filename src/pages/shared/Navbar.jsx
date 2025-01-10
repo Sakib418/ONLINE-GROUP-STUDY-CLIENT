@@ -10,8 +10,8 @@ const Navbar = () => {
      const email = user && user.email;
   const links = <div className='lg:flex gap-2 text-base text-gray-500'>
      <li><NavLink to = "/">Home</NavLink></li>
-     <li><NavLink to = "/campaigns">All Campaigns</NavLink></li>
-     <li><NavLink to = "/addNewCampaign">Add New Campaign</NavLink></li>
+     <li><NavLink to = "/assignments">Assignments</NavLink></li>
+     <li><NavLink to = "/createAssignment">Add New Assignment</NavLink></li>
      {/* {
       user && 
       <>
