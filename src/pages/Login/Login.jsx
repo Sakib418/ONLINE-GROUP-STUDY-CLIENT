@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import AuthContext from '../../context/AuthContext/AuthContext';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate,Link, useLocation } from 'react-router-dom';
 import swal from 'sweetalert2';
 import animationData from '../../assets/Animation - 1735972339956.json'
 import Lottie from 'lottie-react';
@@ -10,7 +10,9 @@ const Login = () => {
     const {handlewithGithub,signInUser} = useContext(AuthContext);
     const  navigate = useNavigate();
     const emailRef = useRef();
-     
+    const location = useLocation();
+    const from = location.state || '/';
+    
 
     
 const handleLogin = (e) => {
@@ -29,7 +31,7 @@ const handleLogin = (e) => {
           icon: "success",
           confirmButtonText: "Cool",
         });
-        navigate("/");
+        navigate(from);
       })
   
       .catch((error) => {
@@ -47,7 +49,7 @@ const handleLogin = (e) => {
     handlewithGithub()
     .then(res => {
         console.log(res.user);
-        navigate('/');
+        navigate(from);
     })
     .catch(error => console.log(error.message));
 }

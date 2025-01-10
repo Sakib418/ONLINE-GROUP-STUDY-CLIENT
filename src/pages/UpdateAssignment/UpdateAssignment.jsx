@@ -19,6 +19,7 @@ const UpdateAssignment = () => {
     Description,
     AssignmentMarks,
     UserEmail,
+    AssignmentDate
   } = assignment;
   
   const handleUpdateAssignment = (e) =>{

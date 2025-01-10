@@ -14,9 +14,7 @@ const Assignments = () => {
    
 
   const handleDelete = (_id,CurrentUser) => {
-
     if(user){
-    
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -62,7 +60,9 @@ const Assignments = () => {
   const updateAssignment = (_id) => {
     navigate(`/updateAssignment/${_id}`)
   }
-
+  const assignmentDetail = (_id) => {
+    navigate(`/assignmentDetail/${_id}`)
+  }
   return (
     <div className="grid lg:grid-cols-3 gap-6 mt-10">
       {
@@ -99,7 +99,7 @@ const Assignments = () => {
                 <button onClick={() => handleDelete (assignment._id,assignment.
 UserEmail) } className="btn btn-sm btn-primary">Delete</button>
                 <button className="btn btn-sm btn-primary" onClick={() => updateAssignment(assignment._id)}>Update</button>
-                <button className="btn btn-sm btn-primary">View</button>
+                <button className="btn btn-sm btn-primary" onClick={() => assignmentDetail(assignment._id)}>View</button>
               </div>
             </div>
           </div>
