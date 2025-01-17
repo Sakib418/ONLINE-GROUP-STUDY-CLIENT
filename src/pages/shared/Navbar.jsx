@@ -16,7 +16,7 @@ const Navbar = () => {
       user && 
       <>
       <li><NavLink to = {`/mySubmittedAssignment/${email}`}>My Assignment</NavLink></li>
-      {/* <li><NavLink to = {`/myDonation/${email}`}>My Donations</NavLink></li> */}
+      <li><NavLink to = {`/PendingAssignment`}>Pending Assignments</NavLink></li>
       </>
      }
      

@@ -33,13 +33,19 @@ const AssignmentDetail = () => {
     const AssignmentID = _id;
     const SubmiterEmail = user.email;
     const Status = 'Pending';
+    const SubmitedBy = user.displayName;
+    const Feedback = '';
+    const ObtainedMarks = '';
    
     const submitionData = {
         GooleDocsLink,
         Notes,
         AssignmentID,
         SubmiterEmail,
-        Status
+        Status,
+        SubmitedBy,
+        Feedback,
+        ObtainedMarks
     } 
     
     fetch('http://localhost:3000/AssignmentSubmition',{
@@ -66,8 +72,6 @@ const AssignmentDetail = () => {
                     Swal.fire('Submition failed!');
                 }
             });
-
-
   }
 
   const handleCloseModal = (e) => {

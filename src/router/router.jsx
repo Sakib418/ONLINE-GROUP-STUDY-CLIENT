@@ -12,6 +12,7 @@ import UpdateAssignment from "../pages/UpdateAssignment/UpdateAssignment";
 import AssignmentDetail from "../pages/AssignmentsPage/AssignmentDetail";
 import PrivateRoute from "./PrivateRoute";
 import MySubmittedAssignments from "../pages/AssignmentsPage/MySubmittedAssignments";
+import PendingAssignments from "../pages/AssignmentsPage/PendingAssignments";
 
  
   
@@ -56,6 +57,11 @@ import MySubmittedAssignments from "../pages/AssignmentsPage/MySubmittedAssignme
           path: '/mySubmittedAssignment/:email',
           element: <PrivateRoute><MySubmittedAssignments></MySubmittedAssignments></PrivateRoute>,
           loader: ({params}) => fetch(`http://localhost:3000/GetAssignmentDataByEmail/${params.email}`)
+        },
+        {
+          path: '/PendingAssignment',
+          element: <PrivateRoute><PendingAssignments></PendingAssignments></PrivateRoute>,
+          loader: () => fetch('http://localhost:3000/GetPendingAssignment')
         }
       ]
     },
