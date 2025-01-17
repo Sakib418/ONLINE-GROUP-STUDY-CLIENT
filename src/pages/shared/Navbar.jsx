@@ -12,13 +12,13 @@ const Navbar = () => {
      <li><NavLink to = "/">Home</NavLink></li>
      <li><NavLink to = "/assignments">Assignments</NavLink></li>
      <li><NavLink to = "/createAssignment">Add New Assignment</NavLink></li>
-     {/* {
+     {
       user && 
       <>
-      <li><NavLink to = {`/myCampaign/${email}`}>My Campaign</NavLink></li>
-      <li><NavLink to = {`/myDonation/${email}`}>My Donations</NavLink></li>
+      <li><NavLink to = {`/mySubmittedAssignment/${email}`}>My Assignment</NavLink></li>
+      {/* <li><NavLink to = {`/myDonation/${email}`}>My Donations</NavLink></li> */}
       </>
-     } */}
+     }
      
     
   </div>
