@@ -4,6 +4,7 @@ import { useNavigate,Link, useLocation } from 'react-router-dom';
 import swal from 'sweetalert2';
 import animationData from '../../assets/Animation - 1735972339956.json'
 import Lottie from 'lottie-react';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -24,14 +25,20 @@ const handleLogin = (e) => {
     signInUser(email, password)
       .then((res) => {
         console.log(res.user);
-        e.target.reset();
+        const user = {email:email}
+        axios.post('http://localhost:3000/jwt',user,{withCredentials:true})
+        .then(res=>{
+          console.log(res.data);
+        })
+        //e.target.reset();
         swal.fire({
           title: "Success!",
           text: "Login Successfully",
           icon: "success",
           confirmButtonText: "Cool",
         });
-        navigate(from);
+        
+        //navigate(from);
       })
   
       .catch((error) => {
