@@ -25,7 +25,7 @@ const handleLogin = (e) => {
     signInUser(email, password)
       .then((res) => {
         console.log(res.user);
-        const user = {email:email}
+        const user = {email:res.user.email}
         axios.post('http://localhost:3000/jwt',user,{withCredentials:true})
         .then(res=>{
           console.log(res.data);
@@ -38,7 +38,7 @@ const handleLogin = (e) => {
           confirmButtonText: "Cool",
         });
         
-        //navigate(from);
+        navigate(from);
       })
   
       .catch((error) => {
@@ -56,6 +56,17 @@ const handleLogin = (e) => {
     handlewithGithub()
     .then(res => {
         console.log(res.user);
+        const user = {email:res.user.email}
+        axios.post('http://localhost:3000/jwt',user,{withCredentials:true})
+        .then(res=>{
+          console.log(res.data);
+        })
+        swal.fire({
+          title: "Success!",
+          text: "Login Successfully",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
         navigate(from);
     })
     .catch(error => console.log(error.message));

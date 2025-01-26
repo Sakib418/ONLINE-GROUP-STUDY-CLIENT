@@ -50,13 +50,13 @@ import PendingAssignments from "../pages/AssignmentsPage/PendingAssignments";
         },
         {
           path: '/assignmentDetail/:id',
-          element: <PrivateRoute><AssignmentDetail></AssignmentDetail></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:3000/GetAssignment/${params.id}`)
+          element: <PrivateRoute><AssignmentDetail></AssignmentDetail></PrivateRoute>
+          //loader: ({params}) => fetch(`http://localhost:3000/GetAssignment/${params.id}`)
         },
         {
           path: '/mySubmittedAssignment/:email',
-          element: <PrivateRoute><MySubmittedAssignments></MySubmittedAssignments></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:3000/GetAssignmentDataByEmail/${params.email}`)
+          element: <PrivateRoute><MySubmittedAssignments></MySubmittedAssignments></PrivateRoute>
+          //loader: ({params}) => fetch(`http://localhost:3000/GetAssignmentDataByEmail/${params.email}`)
         },
         {
           path: '/PendingAssignment',

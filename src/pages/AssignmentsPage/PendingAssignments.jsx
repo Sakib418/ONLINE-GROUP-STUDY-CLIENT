@@ -1,13 +1,23 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { FaBook, FaUserAlt, FaTrophy, FaEdit } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
+import axios from 'axios';
 
 const PendingAssignments = () => {
-    const pendingAssignment = useLoaderData();
+    //const pendingAssignment = useLoaderData();
+    const [pendingAssignment,setpendingAssignment] = useState([]);
     const {user} = useAuth();
+    
+    useEffect(() => {
+      axios.get(`http://localhost:3000/GetPendingAssignment`,{withCredentials: true})
+      .then(res=> setpendingAssignment(res.data))
+    },[user.email]);
+
+
+    
 
     const handleAssignmentMark = (e) => {
         e.preventDefault();

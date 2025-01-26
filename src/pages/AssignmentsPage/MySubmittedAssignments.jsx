@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { FaFileAlt, FaRegClock, FaComments, FaCheckCircle } from 'react-icons/fa'; // Import icons
+import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 
 const MySubmittedAssignments = () => {
-    
-    const assignments = useLoaderData();
+    const [assignments,setassignments] = useState([]);
+    //const assignments = useLoaderData();
+    const {user} = useAuth();
+    useEffect(() => {
+        axios.get(`http://localhost:3000/GetAssignmentDataByEmail/${user.email}`,{withCredentials: true})
+        .then(res=> setassignments(res.data))
+      },[user.email]);
+
 
     return (
         <div className="container mx-auto p-6">
