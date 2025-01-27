@@ -1,11 +1,35 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import logo from '../../assets/images/logo.png'
 import { Tooltip } from "react-tooltip";
+import DarkModeToggle from 'react-dark-mode-toggle';
 const Navbar = () => {
-     
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'true') {
+        setIsDarkMode(true);
+        document.documentElement.classList.add('dark');
+    } else {
+        setIsDarkMode(false);
+        document.documentElement.classList.remove('dark');
+    }
+}, []);
+
+// Function to handle dark mode toggle
+const handleDarkModeToggle = (checked) => {
+    setIsDarkMode(checked);
+    if (checked) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('darkMode', 'true');
+    } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('darkMode', 'false');
+    }
+};
+
      const {user,signOutUser} = useContext(AuthContext);
      const email = user && user.email;
   const links = <div className='lg:flex gap-2 text-base text-gray-500'>
@@ -82,16 +106,28 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-  {
-      user ?
-      <div className='flex gap-2 justify-center items-center'>
-      {/* <span>{user.email}</span> */}
-      <button onClick={handleSignOut} className='btn '>Sign Out</button>
-      </div>
-      
-     :
-     <NavLink to = '/login' className="btn">Login</NavLink>
-    }
+
+  <div className="fixed top-4 right-4">
+  <DarkModeToggle
+      onChange={handleDarkModeToggle} // Handles the toggle
+      checked={isDarkMode}           // Pass the state to the component
+      size={80}                      // Size of the toggle switch
+  />
+</div>
+<div>
+{ 
+  
+  user ?
+  <div className='flex gap-2 justify-center items-center'>
+  {/* <span>{user.email}</span> */}
+  <button onClick={handleSignOut} className='btn btn-primary'>Sign Out</button>
+  </div>
+  
+ :
+ <NavLink to = '/login' className="btn  btn-primary">Login</NavLink>
+}
+</div>
+  
   </div>
 </div>
         </div>
@@ -101,13 +137,3 @@ const Navbar = () => {
 export default Navbar;
 
 
-// {
-//     user ?
-//     <div className='flex gap-2 justify-center items-center'>
-//     {/* <span>{user.email}</span> */}
-//     <button onClick={handleSignOut} className='btn '>Sign Out</button>
-//     </div>
-    
-//    :
-//    <NavLink to = '/login' className="btn">Login</NavLink>
-//   }
