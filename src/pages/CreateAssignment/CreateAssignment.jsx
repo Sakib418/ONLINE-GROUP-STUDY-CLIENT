@@ -1,148 +1,149 @@
-import React, {  useState } from 'react';
-
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from '../../hooks/useAuth';
+
 const CreateAssignment = () => {
+  const { user } = useAuth();
+  const [startDate, setStartDate] = useState(new Date());
 
+  const handleAddAssignment = (e) => {
+    e.preventDefault();
+    const form = e.target;
 
-    const {user} = useAuth();
-    const [startDate, setStartDate] = useState(new Date());
-    
-    
-    const handleAddAssignment = (e) =>{
-        e.preventDefault();
-        const form = e.target;
-        
-        const Username = form.name.value;
-        const imageURL = form.imageURL.value;
-        const Assignmenttitle = form.Assignmenttitle.value;
-        const DifficultyLevel = form.DifficultyLevel.value;
-        const Description = form.Description.value;
-        const AssignmentMarks = form.Marks.value;
-        const AssignmentDate = startDate.toISOString();
-        const UserEmail = form.email.value;
-        
+    const Username = form.name.value;
+    const imageURL = form.imageURL.value;
+    const Assignmenttitle = form.Assignmenttitle.value;
+    const DifficultyLevel = form.DifficultyLevel.value;
+    const Description = form.Description.value;
+    const AssignmentMarks = form.Marks.value;
+    const AssignmentDate = startDate.toISOString();
+    const UserEmail = form.email.value;
 
-        
-        //console.log(name,imageURL,Campaigntitle,Campaigntype,Description,Donationamount,Deadline);
-        
-        const newAssignment = {
-            Username,imageURL,Assignmenttitle,DifficultyLevel,Description,AssignmentMarks,AssignmentDate,UserEmail
+    if (!Assignmenttitle || !Description || !AssignmentMarks || !imageURL || !DifficultyLevel) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please fill in all the required fields.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
 
+    const newAssignment = {
+      Username,
+      imageURL,
+      Assignmenttitle,
+      DifficultyLevel,
+      Description,
+      AssignmentMarks,
+      AssignmentDate,
+      UserEmail,
+    };
+
+    fetch('http://localhost:3000/CreateAssignment', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(newAssignment),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Assignment Added Successfully',
+            icon: 'success',
+            confirmButtonText: 'Cool',
+          });
+          e.target.reset();
         }
-        console.log(newAssignment);
+      });
+  };
 
-         
-        fetch('http://localhost:3000/CreateAssignment',{
-            method: 'POST',
-            headers:{
-                'content-type':'application/json'
-            },
-            body: JSON.stringify(newAssignment)
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.insertedId){
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'User Added Successfully',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                  })
-            }
-        });
-        
-
-        
-    } 
-    return (
-        <div>
-      <h1 className="mb-10 text-3xl font-bold">Add Assignment</h1>
-      <form onSubmit={handleAddAssignment}>
-        {/* <div>
-
-        </div> */}
-        <div className="flex flex-col justify-center items-center gap-2">
-        <input
+  return (
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
+      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Create Assignment</h1>
+      <form onSubmit={handleAddAssignment} className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <input
             type="text"
-            placeholder="Assignment title"
             name="Assignmenttitle"
-            className="input input-bordered w-full max-w-xs"
+            placeholder="Assignment Title"
+            className="input input-bordered w-full"
           />
 
-          <div>
-          <textarea name="Description" class="textarea textarea-bordered w-80" placeholder="Description"></textarea>
-          </div>
-        
           <input
             type="number"
-            placeholder="Marks"
             name="Marks"
-            className="input input-bordered w-full max-w-xs"
+            placeholder="Marks"
+            className="input input-bordered w-full"
           />
-           
+
           <input
             type="url"
-            placeholder="image URL"
             name="imageURL"
-            className="input input-bordered w-full max-w-xs"
+            placeholder="Image URL"
+            className="input input-bordered w-full"
           />
-          
-          <select name= "DifficultyLevel" className="select select-bordered w-full max-w-xs">
-            <option disabled selected value="Difficulty_Level">
-            Difficulty Level
+
+          <select
+            name="DifficultyLevel"
+            className="select select-bordered w-full"
+            defaultValue="Difficulty_Level"
+          >
+            <option disabled value="Difficulty_Level">
+              Difficulty Level
             </option>
             <option value="Easy">Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
           </select>
+        </div>
 
-          <div className="flex items-center justify-center ">
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        className="border  border-gray-300 rounded-lg px-16 py-2 text-gray-700 focus:ring focus:ring-blue-300 focus:outline-none"
-      />
-    </div>
-          
-          {/* <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-            <input
-            type="date"
-            placeholder="Donation amount"
-            name="Deadline"
-            className="input input-bordered w-full max-w-xs"
-          /> */}
-          
+        <textarea
+          name="Description"
+          className="textarea textarea-bordered w-full"
+          placeholder="Description"
+          rows="4"
+        ></textarea>
+
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            className="input input-bordered w-full sm:w-auto"
+          />
+
           <input
-            disabled
-            type="Email"
-            placeholder="email"
+            type="email"
             name="email"
-            defaultValue={user && user?.email}
-            className="input input-bordered w-full max-w-xs"
-          />
-<input
-            type="text"
-            placeholder="User name"
-            name="name"
+            placeholder="Email"
             disabled
-            defaultValue={user && user?.displayName}
-            className="input input-bordered w-full max-w-xs"
+            defaultValue={user?.email}
+            className="input input-bordered w-full sm:w-auto"
           />
 
-<div>
-            <button className="btn btn-secondary btn-wide rounded-full">
-                Add
-            </button>
+          <input
+            type="text"
+            name="name"
+            placeholder="User Name"
+            disabled
+            defaultValue={user?.displayName}
+            className="input input-bordered w-full sm:w-auto"
+          />
         </div>
+
+        <div className="text-center">
+          <button type="submit" className="btn btn-primary btn-wide rounded-full">
+            Add Assignment
+          </button>
         </div>
-        
       </form>
     </div>
-    );
+  );
 };
 
 export default CreateAssignment;

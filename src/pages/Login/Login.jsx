@@ -22,6 +22,17 @@ const handleLogin = (e) => {
     const password = e.target.password.value;
     console.log(email, password);
   
+    if (!email || !password) {
+      swal.fire({
+        title: "Error!",
+        text: "Email and Password are required.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
+
     signInUser(email, password)
       .then((res) => {
         console.log(res.user);

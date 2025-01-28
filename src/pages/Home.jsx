@@ -35,7 +35,7 @@ const Home = () => {
             <Banner />
 
             {/* Feature Section */}
-            <section className="py-12 bg-gradient-to-r from-primary to-accent text-white">
+            <section className="py-12 bg-gradient-to-r from-primary to-accent rounded-lg text-white">
                 <div className="container mx-auto px-6 text-center">
                     <h2 className="text-3xl font-semibold mb-8">Our Features</h2>
 
@@ -60,26 +60,26 @@ const Home = () => {
             </section>
 
             {/* FAQ Section */}
-            <section className="py-12 bg-base-200">
-                <div className="container mx-auto px-6">
-                    <h2 className="text-3xl font-semibold text-center mb-8">FAQs</h2>
+<section className="py-12 bg-base-200">
+    <div className="container mx-auto px-6">
+        <h2 className="text-4xl font-extrabold text-center mb-10 text-primary">Frequently Asked Questions</h2>
 
-                    <Accordion>
-                        <AccordionItem
-                            question="How do I create an assignment?"
-                            answer="Simply log in to your account, navigate to the 'Create Assignment' section, and fill out the required details."
-                        />
-                        <AccordionItem
-                            question="Can I edit an assignment after submission?"
-                            answer="Currently, assignments cannot be edited after submission. However, you can resubmit with updated details if necessary."
-                        />
-                        <AccordionItem
-                            question="Where can I view my submitted assignments?"
-                            answer="Go to the 'My Submissions' section in your dashboard to see all your submitted assignments."
-                        />
-                    </Accordion>
-                </div>
-            </section>
+        <Accordion className="space-y-4">
+            <AccordionItem
+                question="How do I create an assignment?"
+                answer="Simply log in to your account, navigate to the 'Create Assignment' section, and fill out the required details."
+            />
+            <AccordionItem
+                question="Can I edit an assignment after submission?"
+                answer="Currently, assignments can be edited after submission. However, you can resubmit with updated details if necessary."
+            />
+            <AccordionItem
+                question="Where can I view my submitted assignments?"
+                answer="Go to the 'My Submissions' section in your dashboard to see all your submitted assignments."
+            />
+        </Accordion>
+    </div>
+</section>
         </div>
     );
 };

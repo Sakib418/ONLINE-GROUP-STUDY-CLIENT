@@ -4,12 +4,13 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../hooks/useAuth";
+
 const UpdateAssignment = () => {
   const navigate = useNavigate();
   const assignment = useLoaderData();
-  console.log(assignment);
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [startDate, setStartDate] = useState(new Date(assignment.AssignmentDate));
+
   const {
     _id,
     Username,
@@ -19,156 +20,154 @@ const UpdateAssignment = () => {
     Description,
     AssignmentMarks,
     UserEmail,
-    AssignmentDate
   } = assignment;
-  
-  const handleUpdateAssignment = (e) =>{
+
+  const handleUpdateAssignment = (e) => {
     e.preventDefault();
     const form = e.target;
-    if(!user){
-        Swal.fire('Please login first!!');
-      navigate('/login');
+
+    if (!user) {
+      Swal.fire("Please login first!");
+      navigate("/login");
       return;
     }
-    if(user.email !== assignment.UserEmail){
-        Swal.fire('You do not have the access to update this assignment!');
-        return;
+
+    if (user.email !== assignment.UserEmail) {
+      Swal.fire("You do not have the access to update this assignment!");
+      return;
     }
-    const Username = form.name.value;
-    const imageURL = form.imageURL.value;
-    const Assignmenttitle = form.Assignmenttitle.value;
-    const DifficultyLevel = form.DifficultyLevel.value;
-    const Description = form.Description.value;
-    const AssignmentMarks = form.Marks.value;
-    const AssignmentDate = startDate;
-    const UserEmail = form.email.value;
 
-    //console.log(name,imageURL,Campaigntitle,Campaigntype,Description,Donationamount,Deadline);
-    
-    const UpdatedAssignment = {
-        
-        Username,
-        imageURL,
-        Assignmenttitle,
-        DifficultyLevel,
-        Description,
-        AssignmentMarks,
-        AssignmentDate,
-        UserEmail,
-      } 
-    console.log(UpdatedAssignment);
+    const updatedAssignment = {
+      Username: form.name.value,
+      imageURL: form.imageURL.value,
+      Assignmenttitle: form.Assignmenttitle.value,
+      DifficultyLevel: form.DifficultyLevel.value,
+      Description: form.Description.value,
+      AssignmentMarks: form.Marks.value,
+      AssignmentDate: startDate,
+      UserEmail: form.email.value,
+    };
 
-     
-    fetch(`http://localhost:3000/UpdateAssignment/${_id}`,{
-        method: 'PUT',
-        headers:{
-            'content-type':'application/json'
-        },
-        body: JSON.stringify(UpdatedAssignment)
+    // Validation checks
+    if (
+      !updatedAssignment.Assignmenttitle ||
+      !updatedAssignment.Description ||
+      !updatedAssignment.AssignmentMarks ||
+      !updatedAssignment.imageURL ||
+      !updatedAssignment.DifficultyLevel
+    ) {
+      Swal.fire({
+        title: "Error!",
+        text: "Please fill in all the required fields.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
+    // Update assignment request
+    fetch(`http://localhost:3000/UpdateAssignment/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedAssignment),
     })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        if(data.acknowledged){
-            Swal.fire({
-                title: 'Success!',
-                text: 'Assignment Updated Successfully',
-                icon: 'success',
-                confirmButtonText: 'Cool'
-              })
-              navigate('/assignments');
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          Swal.fire({
+            title: "Success!",
+            text: "Assignment Updated Successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+          navigate("/assignments");
         }
-    });
-    
-
-    
-} 
+      });
+  };
 
   return (
-    <div>
-      <h1 className="mb-10 text-3xl font-bold">Update Assignment</h1>
-      <form onSubmit={handleUpdateAssignment}>
-        <div className="flex flex-col justify-center items-center gap-2">
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
+      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Update Assignment</h1>
+      <form onSubmit={handleUpdateAssignment} className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <input
             type="text"
-            placeholder="Assignment title"
             name="Assignmenttitle"
-            className="input input-bordered w-full max-w-xs"
+            placeholder="Assignment Title"
             defaultValue={Assignmenttitle}
+            className="input input-bordered w-full"
           />
-
-          <div>
-            <textarea
-              name="Description"
-              class="textarea textarea-bordered w-80"
-              placeholder="Description"
-              defaultValue={Description}
-            ></textarea>
-          </div>
 
           <input
             type="number"
-            placeholder="Marks"
             name="Marks"
-            className="input input-bordered w-full max-w-xs"
+            placeholder="Marks"
             defaultValue={AssignmentMarks}
+            className="input input-bordered w-full"
           />
 
           <input
             type="url"
-            placeholder="image URL"
             name="imageURL"
-            className="input input-bordered w-full max-w-xs"
+            placeholder="Image URL"
             defaultValue={imageURL}
+            className="input input-bordered w-full"
           />
 
           <select
             name="DifficultyLevel"
-            className="select select-bordered w-full max-w-xs"
+            className="select select-bordered w-full"
             defaultValue={DifficultyLevel}
           >
-            <option disabled  value="Difficulty_Level">
+            <option disabled value="Difficulty_Level">
               Difficulty Level
             </option>
             <option value="Easy">Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
-            
           </select>
+        </div>
 
-          <div className="flex items-center justify-center ">
-            <DatePicker
-               selected={startDate}
-               onChange={(date) => setStartDate(date)}
-              className="border  border-gray-300 rounded-lg px-16 py-2 text-gray-700 focus:ring focus:ring-blue-300 focus:outline-none"
-              //defaultValue={AssignmentDate}
-            />
-          </div>
+        <textarea
+          name="Description"
+          placeholder="Description"
+          defaultValue={Description}
+          className="textarea textarea-bordered w-full"
+          rows="4"
+        ></textarea>
 
-          
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            className="input input-bordered w-full sm:w-auto"
+          />
 
           <input
-            disabled
-            type="Email"
-            placeholder="email"
+            type="email"
             name="email"
+            placeholder="Email"
+            disabled
             defaultValue={UserEmail}
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full sm:w-auto"
           />
+
           <input
             type="text"
-            placeholder="User name"
             name="name"
+            placeholder="User Name"
             disabled
             defaultValue={Username}
-            className="input input-bordered w-full max-w-xs"
+            className="input input-bordered w-full sm:w-auto"
           />
+        </div>
 
-          <div>
-            <button className="btn btn-secondary btn-wide rounded-full">
-              Update
-            </button>
-          </div>
+        <div className="text-center">
+          <button type="submit" className="btn btn-primary btn-wide rounded-full">
+            Update Assignment
+          </button>
         </div>
       </form>
     </div>

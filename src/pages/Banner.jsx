@@ -31,7 +31,7 @@ const Banner = () => {
       animate={{color:['#FF6F61','#FFD700','#FFD700']}}
       transition={{duration:1,repeat: Infinity}}
       > Together!</motion.span> </motion.h1>
-      <p className="py-6">
+      <p className={` py-6 text-black darkMode: text-white `}>
       Learning is better together. Connect, collaborate, and conquer challenges with your study partners from around the world. Turn your group studies into success stories today!
       </p>
       <button className="btn btn-primary">Get Started</button>

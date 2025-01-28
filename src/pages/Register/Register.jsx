@@ -24,6 +24,12 @@ const Register = () => {
         const name = e.target.name.value;
         const photoURL = e.target.photoURL.value;
         console.log (email,password,name,photoURL);
+
+        // Validations
+        if (!name || !email || !password || !photoURL) {
+          toast.warn('All fields are required');
+          return;
+      }
          if(password.length < 6){
           toast.warn('Password should be six character or longer');
           return;
