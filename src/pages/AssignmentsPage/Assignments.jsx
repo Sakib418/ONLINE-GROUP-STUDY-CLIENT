@@ -227,10 +227,10 @@ const Assignments = () => {
 
   return (
     <div>
-      <div className="text-right mb-4">
+      <div className="text-right ">
         <select
           name="DifficultyLevel"
-          className="select select-bordered"
+          className="select select-bordered select-sm"
           defaultValue="Difficulty_Level"
           onChange={handleDifficultyChange}
         >
