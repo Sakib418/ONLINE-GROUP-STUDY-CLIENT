@@ -21,29 +21,16 @@ import router from './router/router.jsx';
 import { RouterProvider } from 'react-router-dom';
 import AuthProvider from './context/AuthContext/AuthProvider.jsx';
 import { ToastContainer } from 'react-toastify';
-import { MdLightMode, MdDarkMode } from 'react-icons/md';
+
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Apply dark mode class to the <html> element
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
 
   return (
     <StrictMode>
       <AuthProvider>
-        <div className={`${isDarkMode ? 'bg-black text-white' : 'bg-white text-black'} min-h-screen`}>
+        <div >
           <div className="p-4 flex justify-end">
-          <button
+          {/* <button
   onClick={toggleDarkMode}
   className="btn btn-primary btn-sm flex items-center text-center"
 >
@@ -56,7 +43,7 @@ function App() {
       <MdDarkMode /> Dark
     </>
   )}
-</button>
+</button> */}
           </div>
           <RouterProvider router={router} />
         </div>

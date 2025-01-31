@@ -81,7 +81,7 @@ const AssignmentDetail = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 bg-white dark:bg-gray-900 text-black dark:text-white">
       
       <div className="text-center">
         <h1 className="text-3xl font-bold mb-4">{Assignmenttitle}</h1>

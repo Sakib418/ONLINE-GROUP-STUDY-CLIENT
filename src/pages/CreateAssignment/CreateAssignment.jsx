@@ -64,85 +64,93 @@ const CreateAssignment = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">Create Assignment</h1>
-      <form onSubmit={handleAddAssignment} className="space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <input
-            type="text"
-            name="Assignmenttitle"
-            placeholder="Assignment Title"
-            className="input input-bordered w-full"
-          />
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl dark:bg-gray-900 dark:text-white">
+  <h1 className="text-3xl font-bold text-center mb-6 text-gray-800 dark:text-white">
+    Create Assignment
+  </h1>
 
-          <input
-            type="number"
-            name="Marks"
-            placeholder="Marks"
-            className="input input-bordered w-full"
-          />
+  <form onSubmit={handleAddAssignment} className="space-y-6">
+    {/* Grid Inputs */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <input
+        type="text"
+        name="Assignmenttitle"
+        placeholder="Assignment Title"
+        className="input input-bordered w-full bg-white text-black dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+      />
 
-          <input
-            type="url"
-            name="imageURL"
-            placeholder="Image URL"
-            className="input input-bordered w-full"
-          />
+      <input
+        type="number"
+        name="Marks"
+        placeholder="Marks"
+        className="input input-bordered w-full bg-white text-black dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+      />
 
-          <select
-            name="DifficultyLevel"
-            className="select select-bordered w-full"
-            defaultValue="Difficulty_Level"
-          >
-            <option disabled value="Difficulty_Level">
-              Difficulty Level
-            </option>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-          </select>
-        </div>
+      <input
+        type="url"
+        name="imageURL"
+        placeholder="Image URL"
+        className="input input-bordered w-full bg-white text-black dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+      />
 
-        <textarea
-          name="Description"
-          className="textarea textarea-bordered w-full"
-          placeholder="Description"
-          rows="4"
-        ></textarea>
-
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            className="input input-bordered w-full sm:w-auto"
-          />
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            disabled
-            defaultValue={user?.email}
-            className="input input-bordered w-full sm:w-auto"
-          />
-
-          <input
-            type="text"
-            name="name"
-            placeholder="User Name"
-            disabled
-            defaultValue={user?.displayName}
-            className="input input-bordered w-full sm:w-auto"
-          />
-        </div>
-
-        <div className="text-center">
-          <button type="submit" className="btn btn-primary btn-wide rounded-full">
-            Add Assignment
-          </button>
-        </div>
-      </form>
+      <select
+        name="DifficultyLevel"
+        className="select select-bordered w-full bg-white text-black dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+        defaultValue="Difficulty_Level"
+      >
+        <option disabled value="Difficulty_Level" className="dark:text-gray-400">
+          Difficulty Level
+        </option>
+        <option value="Easy" className="dark:bg-gray-800 dark:text-white">Easy</option>
+        <option value="Medium" className="dark:bg-gray-800 dark:text-white">Medium</option>
+        <option value="Hard" className="dark:bg-gray-800 dark:text-white">Hard</option>
+      </select>
     </div>
+
+    {/* Description */}
+    <textarea
+      name="Description"
+      className="textarea textarea-bordered w-full bg-white text-black dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+      placeholder="Description"
+      rows="4"
+    ></textarea>
+
+    {/* Date, Email, and Name */}
+    <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        className="input input-bordered w-full sm:w-auto bg-white text-black dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+      />
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        disabled
+        defaultValue={user?.email}
+        className="input input-bordered w-full sm:w-auto bg-gray-100 text-black dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      />
+
+      <input
+        type="text"
+        name="name"
+        placeholder="User Name"
+        disabled
+        defaultValue={user?.displayName}
+        className="input input-bordered w-full sm:w-auto bg-gray-100 text-black dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      />
+    </div>
+
+    {/* Submit Button */}
+    <div className="text-center">
+      <button type="submit" className="btn btn-primary btn-wide rounded-full">
+        Add Assignment
+      </button>
+    </div>
+  </form>
+</div>
+
   );
 };
 

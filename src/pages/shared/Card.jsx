@@ -3,7 +3,7 @@ import React from 'react';
 const Card = ({Assignment}) => {
     console.log(Assignment);
     return (
-        <div className="card card-compact bg-base-100 w-96 shadow-xl">
+        <div className="card card-compact bg-base-100 w-96 shadow-xl  dark:bg-gray-900 text-black dark:text-white">
   <figure>
     <img
       src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"

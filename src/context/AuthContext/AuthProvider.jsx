@@ -39,7 +39,24 @@ const AuthProvider = ({children}) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth,email,password);
     }
-
+    //dark mode functionality
+    const [isDarkMode, setIsDarkMode] = useState(
+        localStorage.getItem("theme") === "dark"
+      );
+    
+      useEffect(() => {
+        if (isDarkMode) {
+          document.documentElement.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        }
+      }, [isDarkMode]);
+    
+      const toggleDarkMode = () => {
+        setIsDarkMode((prevMode) => !prevMode);
+      };
 
 
     const authInfo = {
@@ -48,7 +65,9 @@ const AuthProvider = ({children}) => {
         signOutUser,
         signInUser,
         user,
-        loading
+        loading,
+        isDarkMode, 
+        toggleDarkMode
     }
     
     return (

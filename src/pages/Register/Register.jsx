@@ -73,7 +73,7 @@ const Register = () => {
         .catch(error => console.log(error.message));
     }
     return (
-        <div className="hero bg-base-200 min-h-screen p-2 rounded-xl">
+        <div className="hero bg-base-200 min-h-screen p-2 rounded-xl  dark:bg-gray-900 text-black dark:text-white">
         <div className="hero-content flex-col lg:flex-row-reverse gap-10">
            
             <div className="text-center lg:text-left ">

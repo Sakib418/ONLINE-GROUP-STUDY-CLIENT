@@ -6,7 +6,7 @@ import team2 from '../../src/assets/images/img3.jpg'
 
 const Banner = () => {
     return (
-        <div className="hero bg-base-200 min-h-96 rounded-lg">
+        <div className="hero bg-base-200 min-h-96 rounded-lg  dark:bg-gray-900 text-black dark:text-white">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className='flex-1'>
     <motion.img
@@ -31,7 +31,7 @@ const Banner = () => {
       animate={{color:['#FF6F61','#FFD700','#FFD700']}}
       transition={{duration:1,repeat: Infinity}}
       > Together!</motion.span> </motion.h1>
-      <p className={` py-6 text-black darkMode: text-white `}>
+      <p className=' py-6'>
       Learning is better together. Connect, collaborate, and conquer challenges with your study partners from around the world. Turn your group studies into success stories today!
       </p>
       <button className="btn btn-primary">Get Started</button>

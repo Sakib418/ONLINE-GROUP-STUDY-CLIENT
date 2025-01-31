@@ -4,48 +4,27 @@ import AuthContext from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
 import logo from '../../assets/images/logo.png';
 import { Tooltip } from "react-tooltip";
-
+import { Sun, Moon } from "lucide-react";
 const Navbar = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+ 
 
-  // Apply dark mode class to the <html> element when dark mode is toggled
-  useEffect(() => {
-    // Check if the user has a saved preference in localStorage
-    const savedMode = localStorage.getItem('darkMode') === 'true';
-    setIsDarkMode(savedMode);
-  }, []);
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-
-    // Save the user's preference to localStorage
-    localStorage.setItem('darkMode', isDarkMode);
-  }, [isDarkMode]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
-
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser,isDarkMode, toggleDarkMode } = useContext(AuthContext);
   const email = user && user.email;
 
   const links = (
-    <div className='lg:flex gap-2 text-base text-gray-500'>
-      <li><NavLink to="/">Home</NavLink></li>
-      <li><NavLink to="/assignments">Assignments</NavLink></li>
-      <li><NavLink to="/createAssignment">Add New Assignment</NavLink></li>
+    <div className='lg:flex gap-2 text-base text-gray-500 dark:text-gray-300'>
+      <li><NavLink to="/" className="hover:text-primary dark:hover:text-primary-400">Home</NavLink></li>
+      <li><NavLink to="/assignments" className="hover:text-primary dark:hover:text-primary-400">Assignments</NavLink></li>
+      <li><NavLink to="/createAssignment" className="hover:text-primary dark:hover:text-primary-400">Add New Assignment</NavLink></li>
       {user && (
         <>
-          <li><NavLink to={`/mySubmittedAssignment/${email}`}>My Assignment</NavLink></li>
-          <li><NavLink to="/PendingAssignment">Pending Assignments</NavLink></li>
+          <li><NavLink to={`/mySubmittedAssignment/${email}`} className="hover:text-primary dark:hover:text-primary-400">My Assignment</NavLink></li>
+          <li><NavLink to="/PendingAssignment" className="hover:text-primary dark:hover:text-primary-400">Pending Assignments</NavLink></li>
         </>
       )}
     </div>
   );
+  
 
   const handleSignOut = () => {
     signOutUser()
@@ -54,7 +33,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className='mb-10'>
+    <div className=' bg-yellow-50 rounded-lg dark:bg-gray-900 text-black dark:text-white '>
       <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">
@@ -77,22 +56,35 @@ const Navbar = () => {
               </Tooltip>
             </div>
           </div>
-          <a className="btn btn-ghost text-2xl font-bold hidden lg:block">Fund</a>
+          <a className="btn btn-ghost text-2xl font-bold hidden lg:block">Study</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {links}
           </ul>
         </div>
-        <div className="navbar-end">
-          
+        <div className="navbar-end space-x-3">
+        <button
+        onClick={toggleDarkMode}
+        className="btn btn-primary btn-sm flex items-center btn-circle"
+      >
+        {isDarkMode ? (
+          <>
+            <Sun/> 
+          </>
+        ) : (
+          <>
+             <Moon/> 
+          </>
+        )}
+      </button>
           <div>
             {user ? (
               <div className='flex gap-2 justify-center items-center'>
-                <button onClick={handleSignOut} className='btn btn-primary'>Sign Out</button>
+                <button onClick={handleSignOut} className='btn btn-sm btn-primary'>Sign Out</button>
               </div>
             ) : (
-              <NavLink to='/login' className="btn btn-primary">Login</NavLink>
+              <NavLink to='/login' className="btn btn-sm btn-primary">Login</NavLink>
             )}
           </div>
         </div>
