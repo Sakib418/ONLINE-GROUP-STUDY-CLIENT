@@ -42,7 +42,7 @@ const CreateAssignment = () => {
       UserEmail,
     };
 
-    fetch('http://localhost:3000/CreateAssignment', {
+    fetch('https://online-group-study-server-pi-lyart.vercel.app/CreateAssignment', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

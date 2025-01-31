@@ -66,7 +66,7 @@ const UpdateAssignment = () => {
     }
 
     // Update assignment request
-    fetch(`http://localhost:3000/UpdateAssignment/${_id}`, {
+    fetch(`https://online-group-study-server-pi-lyart.vercel.app/UpdateAssignment/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

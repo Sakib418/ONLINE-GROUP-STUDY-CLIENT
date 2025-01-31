@@ -36,32 +36,32 @@ import PendingAssignments from "../pages/AssignmentsPage/PendingAssignments";
         },
         {
           path: '/createAssignment',
-          element: <CreateAssignment></CreateAssignment>
+          element: <PrivateRoute><CreateAssignment></CreateAssignment></PrivateRoute>
         },
         {
           path: '/assignments',
           element: <Assignments></Assignments>,
-          loader: () => fetch('http://localhost:3000/AllAssignments')
+          loader: () => fetch('https://online-group-study-server-pi-lyart.vercel.app/AllAssignments')
         },
         {
           path: '/updateAssignment/:id',
           element: <UpdateAssignment></UpdateAssignment>,
-          loader: ({params}) => fetch(`http://localhost:3000/GetAssignment/${params.id}`)
+          loader: ({params}) => fetch(`https://online-group-study-server-pi-lyart.vercel.app/GetAssignment/${params.id}`)
         },
         {
           path: '/assignmentDetail/:id',
           element: <PrivateRoute><AssignmentDetail></AssignmentDetail></PrivateRoute>
-          //loader: ({params}) => fetch(`http://localhost:3000/GetAssignment/${params.id}`)
+          //loader: ({params}) => fetch(`https://online-group-study-server-pi-lyart.vercel.app/GetAssignment/${params.id}`)
         },
         {
           path: '/mySubmittedAssignment/:email',
           element: <PrivateRoute><MySubmittedAssignments></MySubmittedAssignments></PrivateRoute>
-          //loader: ({params}) => fetch(`http://localhost:3000/GetAssignmentDataByEmail/${params.email}`)
+          //loader: ({params}) => fetch(`https://online-group-study-server-pi-lyart.vercel.app/GetAssignmentDataByEmail/${params.email}`)
         },
         {
           path: '/PendingAssignment',
           element: <PrivateRoute><PendingAssignments></PendingAssignments></PrivateRoute>,
-          loader: () => fetch('http://localhost:3000/GetPendingAssignment')
+          loader: () => fetch('https://online-group-study-server-pi-lyart.vercel.app/GetPendingAssignment')
         }
       ]
     },

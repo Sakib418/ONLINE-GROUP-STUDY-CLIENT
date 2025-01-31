@@ -27,7 +27,7 @@
 //           }).then((result) => {
 //             if (result.isConfirmed) {
 //              if(user.UserEmail === CurrentUser){
-//               fetch(`http://localhost:3000/DeleteAssignments/${_id}`, {
+//               fetch(`https://online-group-study-server-pi-lyart.vercel.app/DeleteAssignments/${_id}`, {
 //                   method: "DELETE",
 //                 })
 //                   .then((res) => res.json())
@@ -70,7 +70,7 @@
 
 //     try {
 //       //setLoading(true);
-//       const response = await axios.get(`http://localhost:3000/AllAssignments?difficulty=${difficulty}`);
+//       const response = await axios.get(`https://online-group-study-server-pi-lyart.vercel.app/AllAssignments?difficulty=${difficulty}`);
 //       setAssignments(response.data);
 //       //setLoading(false);
 //     } catch (error) {
@@ -172,7 +172,7 @@ const Assignments = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           if (user.email === currentUser) {
-            fetch(`http://localhost:3000/DeleteAssignments/${_id}`, {
+            fetch(`https://online-group-study-server-pi-lyart.vercel.app/DeleteAssignments/${_id}`, {
               method: "DELETE",
             })
               .then((res) => res.json())
@@ -207,7 +207,7 @@ const Assignments = () => {
 
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3000/AllAssignments?difficulty=${difficulty}`);
+      const response = await axios.get(`https://online-group-study-server-pi-lyart.vercel.app/AllAssignments?difficulty=${difficulty}`);
       setAssignments(response.data);
     } catch (error) {
       console.error("Error fetching assignments:", error);

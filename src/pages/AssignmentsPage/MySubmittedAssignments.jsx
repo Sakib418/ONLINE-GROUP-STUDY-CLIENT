@@ -9,7 +9,7 @@ const MySubmittedAssignments = () => {
     //const assignments = useLoaderData();
     const {user} = useAuth();
     useEffect(() => {
-        axios.get(`http://localhost:3000/GetAssignmentDataByEmail/${user.email}`,{withCredentials: true})
+        axios.get(`https://online-group-study-server-pi-lyart.vercel.app/GetAssignmentDataByEmail/${user.email}`,{withCredentials: true})
         .then(res=> setassignments(res.data))
       },[user.email]);
 

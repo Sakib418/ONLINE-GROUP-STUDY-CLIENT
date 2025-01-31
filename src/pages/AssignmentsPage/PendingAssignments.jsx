@@ -12,7 +12,7 @@ const PendingAssignments = () => {
     const {user} = useAuth();
     
     useEffect(() => {
-      axios.get(`http://localhost:3000/GetPendingAssignment`,{withCredentials: true})
+      axios.get(`https://online-group-study-server-pi-lyart.vercel.app/GetPendingAssignment`,{withCredentials: true})
       .then(res=> setpendingAssignment(res.data))
     },[user.email]);
 
@@ -33,7 +33,7 @@ const PendingAssignments = () => {
             Swal.fire('Submitter cannot review their own assignment!');
             return;
         }
-        fetch(`http://localhost:3000/MarkedAssignment/${data.id}`,{
+        fetch(`https://online-group-study-server-pi-lyart.vercel.app/MarkedAssignment/${data.id}`,{
                         method: 'PATCH',
                         headers:{
                             'content-type':'application/json'

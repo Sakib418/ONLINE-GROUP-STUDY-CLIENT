@@ -37,7 +37,7 @@ const handleLogin = (e) => {
       .then((res) => {
         console.log(res.user);
         const user = {email:res.user.email}
-        axios.post('http://localhost:3000/jwt',user,{withCredentials:true})
+        axios.post('https://online-group-study-server-pi-lyart.vercel.app/jwt',user,{withCredentials:true})
         .then(res=>{
           console.log(res.data);
         })
@@ -68,7 +68,7 @@ const handleLogin = (e) => {
     .then(res => {
         console.log(res.user);
         const user = {email:res.user.email}
-        axios.post('http://localhost:3000/jwt',user,{withCredentials:true})
+        axios.post('https://online-group-study-server-pi-lyart.vercel.app/jwt',user,{withCredentials:true})
         .then(res=>{
           console.log(res.data);
         })

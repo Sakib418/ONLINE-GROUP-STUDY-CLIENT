@@ -48,7 +48,7 @@ const AssignmentDetail = () => {
         ObtainedMarks
     } 
     
-    fetch('http://localhost:3000/AssignmentSubmition',{
+    fetch('https://online-group-study-server-pi-lyart.vercel.app/AssignmentSubmition',{
                 method: 'POST',
                 headers:{
                     'content-type':'application/json'
